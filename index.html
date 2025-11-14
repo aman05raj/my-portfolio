@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aman Raj | IoT & Security Developer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* --- VARIABLES & RESET --- */
+        :root {
+            --bg-color: #0a0f1c;
+            --card-bg: rgba(23, 32, 56, 0.7);
+            --primary: #00f2ea; /* Cyan for IoT/Tech vibe */
+            --secondary: #ff0055; /* Neon Red for Security/Alerts */
+            --text-main: #e0e6ed;
+            --text-muted: #94a3b8;
+            --glass: rgba(255, 255, 255, 0.05);
+            --border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; scroll-behavior: smooth; }
+        
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            overflow-x: hidden;
+            background-image: radial-gradient(circle at 50% 50%, #1a2542 0%, #0a0f1c 100%);
+        }
+
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        ul { list-style: none; }
+
+        /* --- NAVIGATION --- */
+        nav {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 20px 5%; position: fixed; width: 100%; top: 0;
+            background: rgba(10, 15, 28, 0.9); backdrop-filter: blur(10px); z-index: 1000;
+            border-bottom: var(--border);
+        }
+        .logo { font-size: 1.5rem; font-weight: bold; color: var(--primary); letter-spacing: 1px; }
+        .nav-links { display: flex; gap: 30px; }
+        .nav-links a:hover { color: var(--primary); }
+        .contact-btn {
+            padding: 8px 20px; border: 1px solid var(--primary); color: var(--primary);
+            border-radius: 5px; font-weight: bold;
+        }
+        .contact-btn:hover { background: var(--primary); color: #000; box-shadow: 0 0 15px var(--primary); }
+
+        /* --- HERO SECTION (MODIFIED FOR 2 COLUMNS) --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: row; /* Changed from column */
+            justify-content: space-between; /* Added */
+            align-items: center; /* Changed from flex-start */
+            padding: 0 10%;
+            position: relative;
+            gap: 40px; /* Added space between text and image */
+        }
+        .hero-text {
+            flex-basis: 60%; /* Text takes 60% width */
+        }
+        .hero-image {
+            flex-basis: 40%; /* Image takes 40% width */
+            text-align: center;
+        }
+        .hero-image img {
+            width: 350px;
+            height: 350px;
+            object-fit: cover; /* Prevents image stretching */
+            border-radius: 50%; /* Makes it a circle */
+            border: 3px solid var(--primary);
+            box-shadow: 0 0 25px rgba(0, 242, 234, 0.5);
+            animation: pulse-glow 2s infinite alternate; /* Added glow effect */
+        }
+
+        /* Pulsing glow animation for image */
+        @keyframes pulse-glow {
+            from {
+                box-shadow: 0 0 15px rgba(0, 242, 234, 0.3);
+                border-color: rgba(0, 242, 234, 0.7);
+            }
+            to {
+                box-shadow: 0 0 35px rgba(0, 242, 234, 0.7);
+                border-color: var(--primary);
+            }
+        }
+
+        .hero h3 { color: var(--primary); font-size: 1.2rem; margin-bottom: 10px; }
+        .hero h1 { font-size: 4rem; line-height: 1.1; font-weight: 800; }
+        .typewriter { font-size: 1.5rem; margin-top: 15px; color: var(--secondary); font-family: 'Courier New', monospace; }
+        .socials { margin-top: 30px; display: flex; gap: 20px; }
+        .socials a { font-size: 1.5rem; color: var(--text-muted); }
+        .socials a:hover { color: var(--primary); transform: translateY(-3px); }
+
+        /* --- BACKGROUND ELEMENTS --- */
+        .orb {
+            position: absolute; border-radius: 50%; filter: blur(80px); z-index: -1;
+        }
+        .orb-1 { width: 300px; height: 300px; background: var(--primary); top: 20%; right: 10%; opacity: 0.2; }
+        .orb-2 { width: 200px; height: 200px; background: var(--secondary); bottom: 10%; left: 5%; opacity: 0.15; }
+
+        /* --- SECTION STYLES --- */
+        section { padding: 80px 10%; }
+        .section-title {
+            font-size: 2rem; margin-bottom: 50px; position: relative; display: inline-block;
+        }
+        .section-title::after {
+            content: ''; position: absolute; width: 50%; height: 3px; background: var(--primary);
+            bottom: -10px; left: 0;
+        }
+
+        /* --- BENTO GRID (PROJECTS & SKILLS) --- */
+        .bento-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        .card {
+            background: var(--card-bg); border: var(--border); padding: 30px;
+            border-radius: 15px; transition: 0.4s; position: relative; overflow: hidden;
+            backdrop-filter: blur(5px);
+        }
+        .card:hover { transform: translateY(-5px); border-color: var(--primary); box-shadow: 0 10px 30px rgba(0, 242, 234, 0.1); }
+        
+        /* --- PROJECTS SPECIFIC --- */
+        .project-date { font-size: 0.8rem; color: var(--secondary); margin-bottom: 10px; display: block; font-weight: bold; }
+        .project-tech { margin-top: 15px; display: flex; flex-wrap: wrap; gap: 10px; }
+        .tech-tag { 
+            font-size: 0.75rem; padding: 4px 10px; background: rgba(0, 242, 234, 0.1); 
+            color: var(--primary); border-radius: 20px; border: 1px solid rgba(0, 242, 234, 0.3);
+        }
+        .patent-badge {
+            position: absolute; top: 15px; right: 15px; background: var(--secondary);
+            color: white; font-size: 0.7rem; padding: 5px 10px; border-radius: 5px; font-weight: bold;
+        }
+
+        /* --- SKILLS --- */
+        .skill-category { margin-bottom: 10px; font-weight: bold; color: var(--text-main); }
+        .skill-bar-container { width: 100%; background: rgba(255,255,255,0.1); height: 8px; border-radius: 4px; overflow: hidden; margin-bottom: 20px;}
+        .skill-bar { height: 100%; background: linear-gradient(90deg, var(--primary), var(--secondary)); width: 0%; transition: 1.5s ease-in-out; }
+
+        /* --- EDUCATION TIMELINE --- */
+        .timeline { border-left: 2px solid var(--border); margin-left: 10px; padding-left: 30px; }
+        .timeline-item { margin-bottom: 40px; position: relative; }
+        .timeline-item::before {
+            content: ''; position: absolute; left: -36px; top: 5px; width: 10px; height: 10px;
+            background: var(--primary); border-radius: 50%; border: 3px solid var(--bg-color);
+        }
+        .timeline-date { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 5px; }
+
+        /* --- CONTACT --- */
+        .contact-container { display: flex; gap: 40px; flex-wrap: wrap; }
+        .contact-info { flex: 1; }
+        .contact-form { flex: 1.5; background: var(--card-bg); padding: 30px; border-radius: 15px; border: var(--border); }
+        input, textarea {
+            width: 100%; background: rgba(0,0,0,0.3); border: var(--border); padding: 15px;
+            margin-bottom: 15px; color: white; border-radius: 5px; outline: none;
+        }
+        input:focus, textarea:focus { border-color: var(--primary); }
+        .btn-submit {
+            background: var(--primary); color: #000; border: none; padding: 12px 30px;
+            font-weight: bold; cursor: pointer; border-radius: 5px;
+        }
+
+        /* MOBILE (MODIFIED) */
+        @media (max-width: 768px) {
+            .hero {
+                flex-direction: column; /* Stack text and image vertically */
+                justify-content: center; /* Center them */
+                text-align: center; /* Center the text */
+                padding-top: 100px; /* Add space from top navbar */
+            }
+            .hero h1 { font-size: 2.5rem; }
+            .hero-image img {
+                width: 250px; /* Make image smaller on mobile */
+                height: 250px;
+                margin-top: 30px; /* Add space between text and image */
+            }
+            .socials {
+                justify-content: center; /* Center social icons */
+            }
+            .nav-links { display: none; }
+            section { padding: 50px 5%; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+
+    <nav>
+        <div class="logo">AMAN RAJ<span style="color:var(--secondary);">.</span></div>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#education">Education</a></li>
+        </ul>
+        <a href="mailto:amanraj05082003@gmail.com" class="contact-btn">Hire Me</a>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-text">
+            <h3>Hello, I am</h3>
+            <h1>Aman Raj</h1>
+            <div class="typewriter">IoT Developer | Security Enthusiast | Maker</div>
+            <p style="margin-top: 20px; max-width: 500px; color: var(--text-muted);">
+                Masters student at LPU specializing in hardware interfaces, MicroPython, and ethical hacking. I build things that connect the physical and digital worlds.
+            </p>
+            <div class="socials">
+                <a href="https://github.com/aman05raj" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://linkedin.com/in/aman-1raj" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="mailto:amanraj05082003@gmail.com"><i class="fas fa-envelope"></i></a>
+            </div>
+        </div>
+        
+        <div class="hero-image">
+            <img src="image.png" alt="Aman Raj">
+        </div>
+    </section>
+
+    <section id="projects">
+        <h2 class="section-title">Featured Projects</h2>
+        <div class="bento-grid">
+            
+            <div class="card">
+                <span class="patent-badge">PATENTED</span>
+                <span class="project-date">June 2025</span>
+                <h3>SmartGlove: Gesture to Speech</h3>
+                <p style="margin-top: 10px; font-size: 0.9rem; color: var(--text-muted);">
+                    Designed a wearable glove to assist people with speaking disabilities by converting hand gestures into real-time audio output.
+                </p>
+                <div class="project-tech">
+                    <span class="tech-tag">Arduino Uno</span>
+                    <span class="tech-tag">MicroPython</span>
+                    <span class="tech-tag">Flex Sensors</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <span class="project-date">May 2024</span>
+                <h3>Robotic Arm RC Vehicle</h3>
+                <p style="margin-top: 10px; font-size: 0.9rem; color: var(--text-muted);">
+                    A Wi-Fi controlled 4-wheel vehicle with a robotic arm, operated via a custom Android App built with MIT App Inventor.
+                </p>
+                <div class="project-tech">
+                    <span class="tech-tag">ESP8266 (NodeMCU)</span>
+                    <span class="tech-tag">C++</span>
+                    <span class="tech-tag">Android Dev</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <span class="project-date">May 2024</span>
+                <h3>Secure Home Automation</h3>
+                <p style="margin-top: 10px; font-size: 0.9rem; color: var(--text-muted);">
+                    Integrated IoT system with RFID access control, gas/fire detection, and automated proximity doors.
+                </p>
+                <div class="project-tech">
+                    <span class="tech-tag">ESP32</span>
+                    <span class="tech-tag">RFID</span>
+                    <span class="tech-tag">IoT</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="skills">
+        <h2 class="section-title">Technical Arsenal</h2>
+        <div class="bento-grid">
+            <div class="card">
+                <i class="fas fa-code" style="font-size: 2rem; color: var(--primary); margin-bottom: 20px;"></i>
+                <h3>Languages</h3>
+                <p style="margin-top: 10px;">C, C++, MicroPython, HTML, CSS</p>
+                <div style="margin-top: 20px;">
+                    <div class="skill-category">C/C++ (Embedded)</div>
+                    <div class="skill-bar-container"><div class="skill-bar" style="width: 90%"></div></div>
+                    <div class="skill-category">MicroPython</div>
+                    <div class="skill-bar-container"><div class="skill-bar" style="width: 85%"></div></div>
+                </div>
+            </div>
+
+            <div class="card">
+                <i class="fas fa-microchip" style="font-size: 2rem; color: var(--secondary); margin-bottom: 20px;"></i>
+                <h3>Tools & Platforms</h3>
+                <p style="margin-top: 10px;">Kali Linux, Ubuntu, Arduino IDE, Thonny IDE</p>
+                <div style="margin-top: 20px;">
+                    <div class="skill-category">Linux/Kali</div>
+                    <div class="skill-bar-container"><div class="skill-bar" style="width: 80%"></div></div>
+                    <div class="skill-category">Arduino Framework</div>
+                    <div class="skill-bar-container"><div class="skill-bar" style="width: 95%"></div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="education" style="background: rgba(0,0,0,0.2);">
+        <div class="bento-grid">
+            
+            <div>
+                <h2 class="section-title">Education</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-date">Aug 2025 - Present</div>
+                        <h3>Master of Computer Application (MCA)</h3>
+                        <p>Lovely Professional University, Punjab</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">Aug 2022 - July 2025</div>
+                        <h3>Bachelor of Computer Application (BCA)</h3>
+                        <p>Lovely Professional University | CGPA: 7.4</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2020 - 2022</div>
+                        <h3>Intermediate (12th)</h3>
+                        <p>DAV Public School, Bihar | 65%</p>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <h2 class="section-title">Certifications & Honors</h2>
+                <div class="card" style="margin-bottom: 20px;">
+                    <h4 style="color: var(--primary);">Smart India Hackathon</h4>
+                    <p class="timeline-date">Participant | Sept 2024</p>
+                </div>
+                <div class="card" style="margin-bottom: 20px;">
+                    <h4 style="color: var(--primary);">Ethical Hacking & Cyber Security</h4>
+                    <p class="timeline-date">Board Infinity | July 2024</p>
+                </div>
+                <div class="card">
+                    <h4 style="color: var(--primary);">Arduino Interface</h4>
+                    <p class="timeline-date">Coursera | Oct 2023</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer style="text-align: center; padding: 40px; background: #050810; color: var(--text-muted);">
+        <p>&copy; 2025 Aman Raj. All Rights Reserved.</p>
+        <p style="font-size: 0.8rem; margin-top: 10px;">Built with Code & Circuitry</p>
+    </footer>
+
+    <script>
+        // Smooth Scroll for links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Simple Animation on Scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        });
+
+        document.querySelectorAll('.card, .timeline-item').forEach((el) => {
+            el.style.opacity = 0;
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'all 0.6s ease-out';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
